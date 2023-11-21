@@ -14,9 +14,6 @@
     -webkit-text-size-adjust: 100%;
 }
 
-/*
-* There should be a 5 pixel margin between the container and the viewport.
-*/
 .container {
     margin: 0;
     padding-top: 10vh;
@@ -25,13 +22,31 @@
     text-align: center;
 }
 
-.left-column,
+.left-column {
+    margin: 0 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    min-width: 0;
+}
+
 .right-column {
     margin: 0 1em;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.draggable-divider {
+    width: 5px;
+    background: linear-gradient(to bottom, rgb(106, 0, 255), yellow);
+    cursor: col-resize;
+    position: relative;
 }
 
 .logo {

@@ -1,4 +1,4 @@
-import {useState} from "preact/hooks";
+import {useState, useEffect, useRef} from "preact/hooks";
 import preactLogo from "./assets/preact.svg";
 import {invoke} from "@tauri-apps/api/tauri";
 import "./App.css";
@@ -7,10 +7,36 @@ function App() {
     const [greetMsg, setGreetMsg] = useState("");
     const [name, setName] = useState("");
 
+    const divider = useRef(null);
+    
     async function greet() {
         // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
         setGreetMsg(await invoke("greet", {name}));
     }
+
+    useEffect(() => {
+        let isDragging = false;
+
+        const handleMouseMove = function (e) {
+            if (!isDragging) return;
+            const container = divider.current.parentElement;
+            const containerRect = container.getBoundingClientRect();
+            const newLeft = (e.clientX - containerRect.left) / containerRect.width * 100;
+            if (newLeft < 10 || newLeft > 90) return;
+            document.querySelector(".left-column").style.width = newLeft + "%";
+            document.querySelector(".right-column").style.width = (100 - newLeft) + "%";
+        };
+
+        divider.current.addEventListener("mousedown", function (e) {
+            isDragging = true;
+            window.addEventListener("mousemove", handleMouseMove);
+        });
+
+        window.addEventListener("mouseup", function (e) {
+            isDragging = false;
+            window.removeEventListener("mousemove", handleMouseMove);
+        });
+    }, []);
 
     return (
         <div class="container">
@@ -30,6 +56,7 @@ function App() {
                     </a>
                 </p>
             </div>
+            <div ref={divider} className="draggable-divider"></div>
             <div className="right-column">
                 <h1>Welcome to Tauri!</h1>
 
