@@ -15,27 +15,17 @@ function App() {
     return (
         <div class="container">
             <div class="left-column">
-                <img src={preactLogo} alt="Preact Logo" class="logo"/>
+                <img src={preactLogo} alt="Preact Logo" class="logo preact"/>
                 <h1>Preact + Tauri</h1>
                 <p>
                     Edit <code>src/App.jsx</code> and save to reload.
                 </p>
                 <p>
-                    <a
-                        class="link"
-                        href="https://preactjs.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
+                    <a class="link" href="https://preactjs.com" target="_blank" rel="noopener noreferrer">
                         Learn Preact
                     </a>
                     {" | "}
-                    <a
-                        class="link"
-                        href="https://tauri.studio"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
+                    <a class="link" href="https://tauri.studio" target="_blank" rel="noopener noreferrer">
                         Learn Tauri
                     </a>
                 </p>
